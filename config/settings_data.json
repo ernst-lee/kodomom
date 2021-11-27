@@ -1,1 +1,63 @@
-{"current":{"social_facebook_link":"#","social_instagram_link":"#","favicon":"shopify:\/\/shop_images\/favicon.png","colors_solid_button_labels":"#efecec","colors_accent_1":"#2a332f","colors_accent_2":"#476154","colors_text":"#1c1a1a","colors_outline_button_labels":"#7b8382","colors_background_1":"#efecec","colors_background_2":"#c1bcae","type_header_font":"americana_n4","type_body_font":"quattrocento_sans_n4","sold_out_badge_color_scheme":"inverse","sections":{"header":{"type":"header","settings":{"logo_image":"shopify:\/\/shop_images\/6e31444a00393849e177c2f8024ee56a2.png","top_menu":"main-menu","sidebar_menu":"side-nav"}},"footer":{"type":"footer","settings":{"footer_link":"footer"}}},"content_for_index":[]}}
+{
+  "current": {
+    "social_facebook_link": "#",
+    "social_instagram_link": "#",
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "colors_solid_button_labels": "#efecec",
+    "colors_accent_1": "#2a332f",
+    "colors_accent_2": "#476154",
+    "colors_text": "#1c1a1a",
+    "colors_outline_button_labels": "#7b8382",
+    "colors_background_1": "#efecec",
+    "colors_background_2": "#c1bcae",
+    "type_header_font": "americana_n4",
+    "type_body_font": "quattrocento_sans_n4",
+    "sold_out_badge_color_scheme": "inverse",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_image": "shopify:\/\/shop_images\/651b0026a4a7491987ac958ff4b1673f.jpg",
+          "top_menu": "main-menu",
+          "sidebar_menu": "side-nav"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_link": "footer"
+        }
+      },
+      "top-classified-navigation": {
+        "type": "top-classified-navigation",
+        "settings": {
+          "category_list": "main-menu"
+        }
+      },
+      "rotating-banner": {
+        "type": "rotating-banner",
+        "settings": {
+          "right_image_url": "",
+          "long_banner_url": "",
+          "buttom_left_image_url": "",
+          "buttom_right_image_url": ""
+        }
+      },
+      "sidebar_baner": {
+        "type": "sidebar_baner",
+        "settings": {
+          "left_banner_url": ""
+        }
+      },
+      "sidebar": {
+        "type": "sidebar",
+        "settings": {
+          "home_category": "main-menu"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  }
+}
