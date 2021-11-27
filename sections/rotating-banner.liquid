@@ -1,0 +1,235 @@
+{%- assign is_home = canonical_url | replace: shop.url , "" -%}
+{%- if is_home == routes.root_url -%}
+<section>
+    <div class="clearfix">
+        <div class="top-slider">
+            <div id="pickup-carousel">
+                {%- if section.blocks != blank -%}
+                    {%- for block in section.blocks -%}
+                    {%- if block.settings.image != blank -%}
+                    <div class="carousel-cell">
+                        <a href="
+                            {%- if block.settings.image_url != blank -%}
+                                {{ block.settings.image_url }}
+                            {%- else -%}
+                                #
+                            {%- endif -%}
+                        ">
+                            <img src="{{ block.settings.image | img_url:'1155x450' }}" alt="">
+                        </a>
+                    </div>
+                    {%- endif -%}
+                    {%- endfor -%}
+                {%- else -%}
+                    <div class="carousel-cell"><a href="#"><img src="{{ 'c0bf0974c61d30a1446e014cbb17ba1f.gif' | asset_url }}" alt=""></a></div>
+                    <div class="carousel-cell"><a href="#"><img src="{{ 'f99cf6cf8bddd58a9f9496fd2b512331.jpg' | asset_url }}" alt=""></a></div>
+                    <div class="carousel-cell"><a href="#"><img src="{{ '4c2219fa090da56d5354e0014ad671cd.jpg' | asset_url }}" alt=""></a></div>
+                    <div class="carousel-cell"><a href="#"><img src="{{ '33720d5360a41830378692117885db13.jpg' | asset_url }}" alt=""></a></div>
+                {%- endif -%}
+            </div>
+            <script type="text/javascript">
+                $('#pickup-carousel').flickity({
+                    contain: true,
+                    wrapAround: true,
+                    imagesLoaded: true,
+                    draggable: true,
+                    prevNextButtons: true,
+                    pageDots:  false,
+                    accessibility: false,
+                    autoPlay: 12000,
+                    pauseAutoPlayOnHover: false
+                });
+            </script>
+        </div>
+
+        <!--电脑端-->
+        <div class="top-banner">
+            <a href="
+                    {%- if section.settings.right_image_url != blank -%}
+                    {{ section.settings.right_image_url }}
+                    {%- else -%}
+                    #
+                    {%- endif -%}
+                ">
+                <img src="
+                    {%- if section.settings.right_image != blank -%}
+                    {{ section.settings.right_image | img_url: '800x800' }}
+                    {%- else -%}
+                    {{ '5b3238dabe484f9e9646ca9bb0341faf.jpg' | asset_url }}
+                    {%- endif -%}
+                " alt="">
+            </a>
+        </div>
+        <!--电脑端end-->
+    </div>
+</section>
+{%- endif -%}
+
+<section>
+
+    {%- if is_home == routes.root_url -%}
+    <div class="top-banner2">
+        <a 
+            href="
+            {%- if section.settings.long_banner_url != blank -%}
+                {{ section.settings.long_banner_url }}
+            {%- else -%}
+                #
+            {%- endif -%}
+            "
+        >
+            <img 
+                src="
+                    {%- if section.settings.long_banner_image != blank -%}
+                    {{ section.settings.long_banner_image | img_url: '1080x160' }}
+                    {%- else -%}
+                    {{ 'd7906a05263e2b5cb5d920b2fa9c5317.jpg' | asset_url }}
+                    {%- endif -%}
+                "
+                alt=""
+            >
+        </a>
+    </div>
+    <!--手机端-->
+    <div class="mobile-and-tablet-only clearfix">
+
+        <div class="top-banner-l">
+            <a 
+                href="
+                {%- if section.settings.buttom_left_image_url != blank -%}
+                    {{ section.settings.buttom_left_image_url }}
+                {%- else -%}
+                    #
+                {%- endif -%}
+                "
+            >
+                <img 
+                    src="
+                        {%- if section.settings.buttom_left_image != blank -%}
+                        {{ section.settings.buttom_left_image | img_url: '800x800' }}
+                        {%- else -%}
+                        {{ '5b3238dabe484f9e9646ca9bb0341faf.jpg' | asset_url }}11111
+                        {%- endif -%}
+                    "
+                    alt=""
+                >
+            </a>
+        </div>
+
+        <div class="top-banner-r">
+            <a 
+                href="
+                {%- if section.settings.buttom_right_image_url != blank -%}
+                    {{ section.settings.buttom_right_image_url }}
+                {%- else -%}
+                    #
+                {%- endif -%}
+                "
+            >
+                <img 
+                    src="
+                        {%- if section.settings.buttom_right_image != blank -%}
+                        {{ section.settings.buttom_right_image | img_url: '800x800' }}
+                        {%- else -%}
+                        {{ 'f82d14c889a5eb294d027f80555a867f.jpg' | asset_url }}11111
+                        {%- endif -%}
+                    "
+                    alt=""
+                >
+            </a>
+        </div>
+
+    </div>
+    {%- endif -%}
+
+    <div class="mobile-and-tablet-only">
+
+        <div class="paradis-postage">
+            {% render 'discount' %}
+        </div>
+
+        <div id="phone-search" class="clearfix">
+            <form role="search" method="get" action="{{ routes.search_url }}">
+                <input 
+                    class="item-search"
+                    type="text"
+                    name="q"
+                    id="s"
+                    placeholder="{{ 'general.search.search' | t }}"
+                    value="{{ search.terms | escape }}"
+                    >
+                <button class="item-search-submit" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+    </div>
+    <!--手机端end-->
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.rotating-banner.name",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "right_image",
+        "label": "t:sections.rotating-banner.settings.right_image.label"
+    },
+    {
+        "type": "url",
+        "id": "right_image_url",
+        "label": "t:sections.rotating-banner.settings.right_image_url.label"
+    },
+    {
+        "type": "image_picker",
+        "id": "long_banner_image",
+        "label": "t:sections.rotating-banner.settings.long_banner_image.label"
+    },
+    {
+        "type": "url",
+        "id": "long_banner_url",
+        "label": "t:sections.rotating-banner.settings.long_banner_url.label"
+    },
+    {
+        "type": "image_picker",
+        "id": "buttom_left_image",
+        "label": "t:sections.rotating-banner.settings.buttom_left_image.label"
+    },
+    {
+        "type": "url",
+        "id": "buttom_left_image_url",
+        "label": "t:sections.rotating-banner.settings.buttom_left_image_url.label"
+    },
+    {
+        "type": "image_picker",
+        "id": "buttom_right_image",
+        "label": "t:sections.rotating-banner.settings.buttom_right_image.label"
+    },
+    {
+        "type": "url",
+        "id": "buttom_right_image_url",
+        "label": "t:sections.rotating-banner.settings.buttom_right_image_url.label"
+    }
+  ],
+  "blocks": [
+      {
+        "type": "column",
+        "name": "t:sections.rotating-banner.settings.column.label",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.rotating-banner.settings.column_image.label"
+          },
+		  {
+            "type": "url",
+            "id": "image_url",
+            "label": "t:sections.rotating-banner.settings.column_url.label"
+          }
+        ]
+      }
+  ]
+}
+{% endschema %}

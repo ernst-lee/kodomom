@@ -1,0 +1,52 @@
+{% comment %}
+ 	Renders a set of links for paginated results. Must be used within paginate tags.
+	
+  	Usage:
+    {% paginate results by 2 %}
+      {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+    {% endpaginate %}
+
+	 Accepts:
+    - paginate: {Object}
+	- show_parts {Boolean} Default: false
+    - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+{% endcomment %}
+
+{%- if paginate.parts.size > 0 -%}
+	<div id="more" class="col s12 relative_on pc-only">
+      
+     {%- if paginate.previous -%}
+      <a href="{{ paginate.previous.url }}{{ anchor }}">
+        <img src="{{ 'left.png' | asset_url }}" style="width:30%">
+      </a>
+      {%- endif -%}
+      <span>&nbsp;</span>
+      {%- if paginate.next -%}
+      <a href="{{ paginate.next.url }}{{ anchor }}">
+        <img src="{{ 'right.png' | asset_url }}" style="width:30%">
+      </a>
+      {%- endif -%}
+    </div>
+    
+
+    <div id="more" class="col s12 relative_on mobile-and-tablet-only" style="text-align:center">
+      <div class="mobile-and-tablet-only clearfix">
+
+        <div class="top-banner-l">
+          {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}{{ anchor }}">
+            <img src="{{ 'left.png' | asset_url }}" style="width:30%">
+          </a>
+          {%- endif -%}
+        </div>
+
+        <div class="top-banner-r">
+          {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}{{ anchor }}">
+            <img src="{{ 'right.png' | asset_url }}" style="width:30%">
+          </a>
+          {%- endif -%}
+        </div>
+     </div>
+    </div>
+{%- endif -%}

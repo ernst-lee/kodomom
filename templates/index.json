@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main-classified-advertisements": {
+      "type": "home-classified-advertisements",
+      "settings": {
+        
+      }
+    },
+    "main-product": {
+      "type": "home-product",
+      "settings": {
+          "collection": "all",
+          "products_per_page": 24
+      }
+    }
+  },
+  "order": [
+    "main-classified-advertisements",
+    "main-product"
+  ]
+}

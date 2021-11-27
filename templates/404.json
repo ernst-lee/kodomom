@@ -1,0 +1,14 @@
+{
+    "sections": {
+      "main": {
+        "type": "main-404",
+        "settings": {
+          "products": "show-404-products",
+          "categorys": "show-category"
+        }
+      }
+    },
+    "order": [
+      "main"
+    ]
+}

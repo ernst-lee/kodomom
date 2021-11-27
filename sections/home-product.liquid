@@ -1,0 +1,52 @@
+{%- if section.settings.collection.products.size > 0 -%}
+<section id="mainContent">
+    <h1>
+        <i class="fa fa-paw dolce-pointcolor" aria-hidden="true"></i>
+        {{ 'sections.home.home_product_title' | t }}
+    </h1>
+
+    {%- paginate section.settings.collection.products by section.settings.products_per_page -%}
+    <div class="row">
+        <div id="products" class="flex-wrapper">
+
+            {%- for product in section.settings.collection.products -%}
+            {% render 'main-product-card',
+              product_card_product: product
+            %}
+            {%- endfor -%}
+
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+            {% render 'paginate', paginate: paginate, anchor: '#mainContent' %}
+        {%- endif -%}
+
+    </div>
+
+    {%- endpaginate -%}
+
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+    "name": "t:sections.index_home.name",
+    "settings": 
+    [
+		{
+		  "type": "collection",
+          "id": "collection",
+		  "label": "t:sections.index_home.settings.collection.label"
+		},
+		{
+		   "type": "range",
+		   "id": "products_per_page",
+		   "min": 6,
+      	   "max": 60,
+		   "step": 1,
+		   "default": 24,
+		   "label": "t:sections.index_home.settings.products_per_page.label"
+		}
+	]
+  }
+{% endschema %}

@@ -1,0 +1,1 @@
+$(function(){$(".bx-viewport").css({overflow:"visible"})});

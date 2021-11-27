@@ -1,0 +1,70 @@
+<div id="shopinfo">
+    <div class="divider"></div>
+    <div class="brand-logo-bottom">
+        <a href="{{ routes.root_url }}">
+            <span class="dolce_logo_color">
+                <img 
+                    class="logoImage"
+                    src="
+                        {%- if section.settings.logo_image != blank -%}
+                        {{ section.settings.logo_image | img_url:'master' }}
+                        {%- else -%}
+                        {{ '651b0026a4a7491987ac958ff4b1673f.jpg' | asset_url }}
+                        {%- endif -%}
+                    "
+                    alt="{{ 'footer.shop_info' | t }}"
+                    >
+            </span>
+        </a>
+    </div>
+    <div class="mart15">
+        {% render 'propaganda' %}
+    </div>
+</div>
+
+<footer class="page-footer-noitem">
+    <section>
+        <div class="footer-copyright">
+            <div class="container-wide">
+                <div class="footer-link-text mart10 clearfix">
+                    <i class="fa fa-copyright"></i>
+                    {{ 'footer.shop_info' | t }}
+                    {%- if section.settings.footer_link != blank -%}
+                        {%- for link in section.settings.footer_link.links -%}
+                        <a href="{{ link.url }}">
+                            {{ link.title }}
+                        </a>
+                        |
+                        {%- endfor -%}
+                    {%- endif -%}
+
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+
+<div id="page-top">
+    <a class="btn-floating btn waves-effect waves grey lighten-5">
+        <i class="fa fa-caret-up blue-grey-text text-darken-2"></i>
+    </a>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "t:sections.top-header.settings.logo.label"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_link",
+      "default": "footer",
+      "label": "t:sections.footer.blocks.link_list.settings.menu.label"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+{%- if section.settings.category_list != blank -%}
+<section>
+    <div id="main-cat">
+        <ul id="appsItemCategoryTag">
+            {%- for link in section.settings.category_list.links -%}
+
+            <li class="appsItemCategoryTag_child">
+                <a href="{{ link.url }}" class="mainHeaderNavColor">{{ link.title | escape }}</a>
+
+                {%- if link.links != blank -%}
+                    <ul class="appsItemCategoryTag_lowerchild">
+                        {%- for childlink in link.links -%}
+                        <li>
+                            <a href="{{ childlink.url }}" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">{{ childlink.title | escape }}</a>
+                        </li>
+                        {%- endfor -%}
+                    </ul>
+                {%- endif -%}
+
+            </li>
+
+            {%- endfor -%}
+        </ul>
+        <script type="text/javascript">
+            $(function() {
+                var nav = $('#main-cat #appsItemCategoryTag');
+                var navTop = nav.offset().top;
+                $('li', nav).hover(function(){
+                        $('ul',this).stop().slideDown('fast');
+                    },
+                    function(){
+                        $('ul',this).stop().slideUp('fast');
+                    });
+            });
+        </script>
+    </div>
+</section>
+{%- endif -%}
+
+<section>
+    <div id="main-search" class="clearfix">
+        <form role="search" method="get" action="{{ routes.search_url }}">
+            <input 
+                class="item-search"
+                type="text"
+                name="q"
+                id="s"
+                placeholder="{{ 'general.search.search' | t }}"
+                value="{{ search.terms | escape }}"
+                >
+            <button class="item-search-submit" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.top-classified-navigation.name",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "category_list",
+      "default": "main-menu",
+      "label": "t:sections.top-classified-navigation.settings.category_list.label"
+    }
+  ]
+}
+{% endschema %}

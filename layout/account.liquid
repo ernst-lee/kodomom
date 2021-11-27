@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <link rel="stylesheet" type="text/css" href="{{ 'BASEshop-c1008465933ef92e4522.css' | asset_url }}"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel='canonical' href='{{ canonical_url }}' />
+
+    <title>
+        {{ page_title }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    <link rel='icon' type='image/png' href='{{ '524dc703b205b0913d3da11322815855.png' | asset_url }}' />
+    <link rel='apple-touch-icon' sizes='180x180' href='{{ '524dc703b205b0913d3da11322815855.png' | asset_url }}' />
+    <link rel='apple-touch-icon-precomposed' href='{{ '524dc703b205b0913d3da11322815855.png' | asset_url }}' />
+
+    {{ content_for_header }}
+
+    <script src="{{ 'jquery-1.8.2.min.js' | asset_url }}"></script>
+
+    <link href="{{ 'googleapis.css' | asset_url }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ 'materialize.min.css' | asset_url }}" type="text/css">
+    <link rel="stylesheet" href="{{ 'font-awesome.min.css' | asset_url }}" type="text/css">
+    <link rel="stylesheet" href="{{ 'flickity.min.css' | asset_url }}" type="text/css">
+    <link rel="stylesheet" href="{{ 'common.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'dolce.vita.min.css' | asset_url }}" type="text/css">
+    <script type='text/javascript' src="{{ 'flickity.pkgd.min.js' | asset_url }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ 'style.css' | asset_url }}">
+    <script type="text/javascript" src="{{ 'labelpostion.js' | asset_url }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ 'head.css' | asset_url }}">
+
+    <link rel="stylesheet" href="{{ 'BASEshop-c1008465933ef92e4522.css' | asset_url }}">
+
+    <link rel="stylesheet" href="{{ 'add.css' | asset_url }}">
+</head>
+
+<body id="shopTopPage">
+
+    <div class="skyscraper">
+
+        <div id="container">
+
+            {% section 'header' %}
+
+            <div class="maincontainer">
+                <div class="clearfix">
+                    <!--主体--> 
+                    {{ content_for_layout }}
+                    <!--主体end--> 
+                </div>
+            </div>
+
+        </div>
+
+        {% section 'footer' %}
+
+    </div>
+
+    <script type='text/javascript' src="{{ 'materialize.min.js' | asset_url }}"></script>
+
+    <script type='text/javascript' src="{{ 'vivace.js' | asset_url }}"></script>
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="{{ 'html5shiv.js' | asset_url }}"></script>
+    <script type="text/javascript" src="{{ 'respond.min.js'  | asset_url  }}"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        //html.loading-delay
+        setTimeout(function() {
+            if (document.getElementsByTagName("html")[0].classList.contains('wf-active') != true) {
+                document.getElementsByTagName("html")[0].classList.add('loading-delay');
+            }
+        }, 2000);
+    </script>
+
+    <script>
+        window.routes = {
+            cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+        };
+        
+        window.cartStrings = {
+            error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t }}`
+        };
+        
+        window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        }
+        
+        window.accessibilityStrings = {
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        }
+    </script>
+
+</body>
+</html>
+

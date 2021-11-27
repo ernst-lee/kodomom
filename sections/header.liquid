@@ -1,0 +1,156 @@
+<header>
+    <div id="header">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="header-container">
+                    <div class="clearfix">
+                        <a href="#" data-activates="mobile" class="button-collapse">
+                            <span class="css-bar"></span>
+                        </a>
+                        <div class="brand-logo">
+                            <h1>
+                                <a href="{{ routes.root_url }}">
+                                    <img class="logoImage" src="
+                                    {%- if section.settings.logo_image != blank -%}
+                                    {{ section.settings.logo_image | img_url:'master' }}
+                                    {%- else -%}
+                                    {{ '651b0026a4a7491987ac958ff4b1673f.jpg' | asset_url }}
+                                    {%- endif -%}
+                                    " alt="{{ 'header.logo_title' | t }}">
+                                </a>
+                            </h1>
+                        </div>
+                        <ul class="hide-on-med-and-down dropmenu">
+                            <li class="logo mainlogo marr20">
+                                <a href="{{ routes.root_url }}">
+                                    <span class="dolce_logo_size">
+                                        <img class="logoImage" src="
+                                        {%- if section.settings.logo_image != blank -%}
+                                        {{ section.settings.logo_image | img_url:'master' }}
+                                        {%- else -%}
+                                        {{ '651b0026a4a7491987ac958ff4b1673f.jpg' | asset_url }}
+                                        {%- endif -%}   
+                                        " alt="{{ 'header.logo_title' | t }}">
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="effect">
+                                <span class="paradis-postage">
+                                    {% render 'discount' %}
+                                </span>
+                            </li>
+
+                            <li class="effect">
+                                <div id="baseMenu">
+                                    <ul class="clearfix">
+                                        <li class="cart">
+                                            <a href="{{ routes.cart_url }}">
+                                                <img src="{{ 'cart.png' | asset_url }}" alt="shopping cart" height="30">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            {%- if section.settings.top_menu != blank -%}
+                              {%- for link in section.settings.top_menu.links -%}
+                              <li class="effect">
+                                  <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                              </li>
+                              {%- endfor -%}
+                            {%- endif -%}
+
+                        </ul>
+                        
+                        {%- if section.settings.sidebar_menu != blank -%}
+                        <ul class="side-nav collapsible collapsible-accordion" id="mobile">
+                            
+                            {%- for link in section.settings.sidebar_menu.links -%}
+
+                            <li class="side-nav-arrow">
+                                <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                            </li>
+
+                            {%- if link.links != blank -%}
+                            <li>
+                                <ul id="appsItemCategoryTag">
+                                    {%- for childlink in link.links -%}
+                                    <li class="appsItemCategoryTag_child">
+                                    <a href="{{ childlink.url }}" class="mainHeaderNavColor">
+                                        {{ childlink.title | escape }}
+                                    </a>
+
+                                        {%- if childlink.links != blank -%}
+                                        <ul class="appsItemCategoryTag_lowerchild">
+                                        {%- for grandchildlink in childlink.links -%}
+                                        <li>
+                                            <a href="{{ grandchildlink.url }}" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">
+                                            {{ grandchildlink.title | escape }}
+                                            </a>
+                                        </li>
+                                        {%- endfor -%}
+                                        </ul> 
+                                        {%- endif -%}
+
+                                    </li>
+                                    {%- endfor -%}
+                                </ul>
+                            </li>
+                            {%- endif -%}
+
+                            {%- endfor -%}
+                            
+                            
+                            <li class="base-icon">
+                                <div id="BASEtag-mobile" class="mobile-and-tablet-only">
+                                    <div id="baseMenu">
+                                        <ul class="clearfix">
+                                            <li class="base"  style="visibility: hidden;" >
+                                                <a target="_blank"  rel="nofollow">
+                                                    <img src="{{ 'base.png' | asset_url }}" height="30">
+                                                </a>
+                                            </li>
+                                            <li class="cart">
+                                                <a href="{{ routes.cart_url }}">
+                                                    <img src="{{ 'cart.png' | asset_url }}" alt="shopping cart" height="30">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        {%- endif -%}
+                        
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "t:sections.top-header.settings.banner_image.label"
+    },
+    {
+      "type": "link_list",
+      "id": "top_menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.top_menu.label"
+    },
+    {
+      "type": "link_list",
+      "id": "sidebar_menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.sidebar_menu.label"
+    }
+  ]
+}
+{% endschema %}

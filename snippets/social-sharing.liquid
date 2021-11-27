@@ -1,0 +1,42 @@
+<div class="social clearfix">
+
+  {% if settings.share_twitter %}
+  <div class="twitter">
+    <a 
+       target="_blank"
+       href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}"
+       class="twitter-share-button"
+   	   alt="{{ 'general.social.alt_text.share_on_twitter' | t }}"
+       >
+      {{ 'general.social.share_on_twitter' | t }}
+    </a>
+  </div>
+  {% endif %}
+  
+  {% if settings.share_facebook %}
+  <div class="facebook">
+    <a 
+       target="_blank"
+       href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}"
+       class="facebook-share-button"
+       alt="{{ 'general.social.alt_text.share_on_facebook' | t }}"
+       >
+      {{ 'general.social.share_on_facebook' | t }}
+    </a>
+  </div>
+  {% endif %}
+  
+  {% if settings.share_pinterest %}
+  <div class="pinterest">
+    <a 
+       target="_blank"
+       href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}"
+       class="pinterest-share-button"
+  	   alt="{{ 'general.social.alt_text.share_on_pinterest' | t }}"
+       >
+      {{ 'general.social.share_on_pinterest' | t }}
+    </a>
+  </div>
+  {% endif %}
+
+</div>           

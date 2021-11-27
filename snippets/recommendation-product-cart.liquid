@@ -1,0 +1,28 @@
+{%- liquid
+  if use_variant
+    assign target = product_card_product.selected_or_first_available_variant
+  else
+    assign target = product_card_product
+  endif
+  assign price = target.price | default: 1999
+  assign money_price = price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+  endif
+-%}
+
+<div class="related-flex-col3">
+  <a href="{{ product_card_product.url | default: '#' }}">
+      <img src="{{ product_card_product.featured_media | img_url: 'master' }}"
+         alt="{{ product_card_product.title }}" title="{{ product_card_product.title }}">
+    
+      <div class="text-center">
+        <div class="wish-title">
+          {{ product_card_product.title }}
+        </div>
+        <div class="price">
+          {{ money_price }}
+        </div>
+      </div>
+  </a>
+</div>

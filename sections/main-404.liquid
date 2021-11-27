@@ -1,0 +1,99 @@
+{{ 'pc_shop.css' | asset_url | stylesheet_tag }}
+<div class="notfound__wrapper">
+    <div>
+        <h2 class="notfound__heading">
+            {{ 'templates.404.title_is' | t }}
+        </h2>
+    </div>
+  
+    <div class="notfound__topBtns">
+        <a class="topBtn btn--main" href="{{ routes.root_url }}">
+            {{ 'templates.404.go_home' | t }}
+        </a>
+    </div>
+
+    <section class="shopBlock">
+      {%- if section.settings.products.links != blank -%}
+      	<h2 class="shopBlock__title">
+            {{ shop.name }}{{ 'templates.404.other_product' | t }}
+        </h2>
+        <div class="shopBlock__items">
+            <ul class="itemList">
+              {%- for product in section.settings.products.links -%}
+                <li class="itemList__li">
+                    <a class="itemList__link" href="{{ product.url }}">
+                        <img 
+                             class="itemList__img" 
+                             src="{{ product.object.featured_image | img_url:'300x300' }}"
+                            alt="{{ product.title }}"
+                            title="{{ product.title }}"
+                             >
+                        <div class="itemList__title">
+                            <div class="itemList__textwrapper">
+                                <span class="itemText__name">
+                                    {{ product.title | escape }}
+                                </span>
+                                <br>
+                                <span class="itemText__price">
+                                    {{ product.object.price_min | money }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+        </div>
+      {%- endif -%}
+      
+      {%- if section.settings.categorys.links != blank -%}
+        <div class="shopCat">
+            <h3 class="shopCat__title">
+                {{ 'templates.404.categorys' | t }}
+            </h3>
+          
+            <ul id="categoryList">
+               
+              	{%- for link in section.settings.categorys.links -%}
+                    <li class="categoryList__child">
+                          <div class="categoryList__childInner">
+                              <a href="{{ link.url }}" class="categoryList__link">
+                                  {{ link.title }}
+                              </a>
+                          </div>
+                      	{%- if link.links != blank -%}
+                          <ul class="categoryList__lowerList">
+                            {%- for childlink in link.links -%}
+                            <li class="categoryList__lowerChild">
+                                <a href="{{ childlink.url }}" class="categoryList__lowerLink">
+                                    {{ childlink.title | escape }}
+                                </a>
+                            </li>
+                             {%- endfor -%}	
+                          </ul>
+                      	{%- endif -%}
+                    </li>
+              	{%- endfor -%}
+              
+            </ul>
+        </div>
+      {%- endif -%}
+    </section>
+</div>
+{% schema %}
+  {
+    "name": "t:sections.404.name",
+    "settings": [
+		{
+			"type": "link_list",
+            "id": "products",
+            "label": "t:sections.404.settings.products.label"
+		},
+		{
+			"type": "link_list",
+            "id": "categorys",
+            "label": "t:sections.404.settings.categorys.label"
+		}
+	]
+  }
+{% endschema %}

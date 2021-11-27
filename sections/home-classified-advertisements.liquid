@@ -1,0 +1,107 @@
+<section>
+    <h1>
+        <i class="fa fa-paw dolce-pointcolor" aria-hidden="true"></i>
+        {{ 'sections.home.home_classified_advertisements_title' | t }}
+    </h1>
+    <div class="row flex-wrapper">
+
+        {%- if section.blocks != blank -%}
+            {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+            <div class="pickup-cell-col2">
+                <a href="
+                    {%- if block.settings.image_url != blank -%}
+                        {{ block.settings.image_url }}
+                    {%- else -%}
+                        #
+                    {%- endif -%}
+                ">
+                    <div class="index-pickup">
+                        <img src="{{ block.settings.image | img_url:'390x160' }}" alt="">
+                        <div class="index-pickup-desc">{{ block.settings.title }}</div>
+                    </div>
+                </a>
+            </div>
+            {%- endif -%}
+            {%- endfor -%}
+        {%- else -%}
+        <div class="pickup-cell-col2">
+            <a href="#">
+                <div class="index-pickup">
+                    <img src="{{ '2611f4df3aa365e2a80918da92f33185.jpg' | asset_url }}" alt="">
+                    <div class="index-pickup-desc">新作商品</div>
+                </div>
+            </a>
+        </div>
+        <div class="pickup-cell-col2">
+            <a href="#">
+                <div class="index-pickup">
+                    <img src="{{ 'f3acfb312c0302568747c8ae9ec10ef3.jpg' | asset_url }}" alt="">
+                    <div class="index-pickup-desc">3407713</div>
+                </div>
+            </a>
+        </div>
+        <div class="pickup-cell-col2">
+            <a href="#">
+                <div class="index-pickup">
+                    <img src="{{ 'f11fb9b52fc2342c5dbb6b6ace8caaf9.jpg' | asset_url }}" alt="">
+                    <div class="index-pickup-desc">ワンピース</div>
+                </div>
+            </a>
+        </div>
+        <div class="pickup-cell-col2">
+            <a href="#">
+                <div class="index-pickup">
+                    <img src="{{ '33a27309d38846227a3eec38e9e0d357.jpg' | asset_url }}" alt="">
+                    <div class="index-pickup-desc">シューズ</div>
+                </div>
+            </a>
+        </div>
+        <div class="pickup-cell-col2">
+            <a href="#">
+                <div class="index-pickup">
+                    <img src="{{ 'e2140f38ed85f0bf824545d10eb1e8ce.jpg' | asset_url }}" alt="">
+                    <div class="index-pickup-desc">トップス</div>
+                </div>
+            </a>
+        </div>
+        <div class="pickup-cell-col2">
+            <a href="#">
+                <div class="index-pickup">
+                    <img src="{{ '31dde4703f46501bba4212c519c2d396.jpg' | asset_url }}" alt="">
+                    <div class="index-pickup-desc">アクセサリー</div>
+                </div>
+            </a>
+        </div>
+        {%- endif -%}
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "t:sections.index_home.settings.home-classified-advertisements.label",
+    "blocks": [
+      {
+        "type": "column",
+        "name": "t:sections.index_home.settings.home-classified-advertisements-column.label",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.index_home.settings.home-classified-advertisements-column-image.label"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.index_home.settings.home-classified-advertisements-column-title.label"
+          },
+		  {
+            "type": "url",
+            "id": "image_url",
+            "label": "t:sections.index_home.settings.home-classified-advertisements-column-url.label"
+          }
+        ]
+      }
+  ]
+}
+{% endschema %}

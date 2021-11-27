@@ -1,0 +1,28 @@
+{
+    "sections": {
+      "main": {
+        "type": "main-cart",
+        "blocks": {
+          "da9ef05c-7b2e-451f-8139-2c7bc658e3fe": {
+            "type": "subtotal",
+            "settings": {
+            }
+          },
+          "d8eac601-af77-403e-9824-dcebf1c41b6e": {
+            "type": "buttons",
+            "settings": {
+            }
+          }
+        },
+        "block_order": [
+          "da9ef05c-7b2e-451f-8139-2c7bc658e3fe",
+          "d8eac601-af77-403e-9824-dcebf1c41b6e"
+        ],
+        "settings": {
+        }
+      }
+    },
+    "order": [
+      "main"
+    ]
+}

@@ -1,0 +1,28 @@
+<div class="flex-cell-col2">
+  <div class="item">
+      <div class="index-label">
+        {%- if product_card_product.compare_at_price > product_card_product.price and product_card_product.available -%}
+        <img src="{{'Ribbon_sale_wh.png' | asset_url }}" class="label_image list">
+        {%- endif -%}
+      </div>
+      <div class="row index-block">
+          <div class="top-thumb">
+              <a href="{{ product_card_product.url | default: '#' }}">
+                  <img 
+                    src="{{ product_card_product.featured_media | img_url:"640x640" }}"
+                    title="{{ product_card_product.title }}"
+                    alt="{{ product_card_product.title }}"
+                  >
+                  <div class="index-title-box">
+                      <div class="paradis-title text-flow">
+                        {{ product_card_product.title }}
+                      </div>
+
+                      {% render 'price', product: product_card_product %}
+
+                  </div>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>

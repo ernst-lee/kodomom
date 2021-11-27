@@ -1,0 +1,249 @@
+<script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+<section>
+    
+  <h1>
+    <i class="fa fa-paw dolce-pointcolor">
+    </i>
+    {{ product.title }}
+  </h1>
+    
+  <div id="product" class="area">
+        
+        <div class="itempage-item clearfix">
+          
+          {%- if product.images != blank -%}
+            <div class="itempage-item__mainImage">
+              {%- for main_image in product.images -%}
+                <div class="itempage-item__cell cell{% increment main_image_loop %}">
+                    <img src="{{ main_image | img_url:'master' }}">
+                </div>
+              {%- endfor -%}
+            </div>
+          
+            <ul class="preview button-group">
+              {%- for product_image in product.images -%}
+                <li class="preview__content">
+                    <div>
+                        <img src="{{ product_image | img_url:'master' }}"
+                          class="button" data-selector=".cell{% increment product_image_loop %}">
+                    </div>
+                </li>
+                {%- endfor -%}
+            </ul>
+          
+            <script type="text/javascript">
+                $('.itempage-item__mainImage').flickity({
+                    contain: true,
+                    wrapAround: true,
+                    imagesLoaded: true,
+                    draggable: true,
+                    prevNextButtons: false,
+                    pageDots: false,
+                    accessibility: false,
+                    autoPlay: false,
+                    dragThreshold: 15
+                });
+
+                var flkty = new Flickity('.itempage-item__mainImage');
+                var buttonGroup = document.querySelector('.button-group');
+                buttonGroup.addEventListener('click',
+                function(event) {
+                    // filter for button clicks
+                    if (!matchesSelector(event.target, '.button')) {
+                        return;
+                    }
+                    var selector = event.target.getAttribute('data-selector');
+                    flkty.selectCell(selector);
+                });
+            </script>
+          {%- endif -%}
+          
+        </div>
+        
+        <div id="price-and-purchase">
+            <div class="page-itemtitle">
+                {{ product.title }}
+            </div>
+          
+            {% render 'product-price', product: product %}
+          
+            {%- if product.description != blank -%} 
+              <div class="marb20">
+                  {{ product.description }}
+              </div>
+            {%- endif -%}
+          
+            {%- assign product_form_id = 'product-form-' | append: section.id -%}
+            {%- form 'product' , product , id: product_form_id -%}
+
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+                  <div id="itemSelect">
+                        {%- unless product.has_only_default_variant -%}
+                        <variant-selects data-section="{{ section.id }}" data-url="{{ product.url }}">
+                        {%- for option in product.options_with_values -%}
+                        <div id="variationSelectWrap" class="purchaseElement" >
+                          <label for="valiationSelect">
+                              {{ option.name }}
+                          </label>
+                          
+                          <div class="select-wrapper">
+
+                              <i class="mdi-navigation-arrow-drop-down active">
+                              </i>
+                            
+                              <select id="Option-{{ section.id }}-{{ forloop.index0 }}" class="select__select" name="options[{{ option.name | escape }}]" form="product-form-{{ section.id }}">
+                                {%- for value in option.values -%}
+                                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                    {{ value }}
+                                  </option>
+                                {%- endfor -%}
+                            </select> 
+
+                          </div>
+
+                          </div>
+                        {% endfor %}
+                          <script type="application/json">
+                      {{ product.variants | json }}
+                    </script>
+                          </variant-selects>
+                        {%- endunless -%}
+
+                        <div id="amountSelectWrap" class="purchaseElement" >
+                          <label for="amountSelect">
+                            {{ 'products.product.quantity.label' | t }}
+                          </label>
+
+                          <div class="select-wrapper">
+
+                            <i class="mdi-navigation-arrow-drop-down active">
+                            </i>
+
+                            <select name="quantity" id="amountSelect" class="amountSelect initialized">
+                              {% for number in (1..100) %}
+                                <option value="{{ number }}">
+                                    {{ number }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+
+                  </div>
+
+                  <div class="purchaseButton">
+                    <button 
+                            name="add"
+                            type="submit"
+                            class="purchaseButton__btn purchaseButton__btn--addToCart"
+                          style="display: block;" 
+                            {% if product.selected_or_first_available_variant.available == false %}
+                            disabled
+                            {% endif %}
+                            >
+                        {%- if product.selected_or_first_available_variant.available -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                    </button>
+                    
+                    {%- if section.settings.show_dynamic_checkout -%}
+                        {{ form | payment_button }}
+                    {%- endif -%}
+                    
+                  </div>
+
+            {%- endform -%}
+          
+            {% render 'about-freight' %}
+
+            {% if section.settings.show_share_buttons %}
+
+                {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media %}
+
+            {% endif %}
+          
+        </div>
+        
+  </div>
+  
+
+  <div id="doloce-related">
+        
+        <h1>
+            <i class="fa fa-paw dolce-pointcolor">
+            </i>
+            {{ 'products.product.product_recommendations' | t }}
+        </h1>
+    
+        <div class="marl5 marr5">
+          <div class="related-flex-wrapper">
+          <product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=3">
+            {% if recommendations.performed and recommendations.products_count > 0 %}
+            <div class="relatedItems clearfix">
+              <div class="sec-ttl crim">
+                <div class="list-ttl">{{ section.settings.heading | escape }}<span class="bar"></span></div>
+              </div>
+              <ul style="display: flex;justify-content: space-between;flex-wrap: wrap;">
+                {% for recommendation in recommendations.products %}
+                {% render 'recommendation-product-cart',
+                          product_card_product: recommendation
+                %}
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          </product-recommendations>  
+        </div>
+  </div>
+  </div>
+</section>
+
+
+{% javascript %}
+  class ProductRecommendations extends HTMLElement {
+    constructor() {
+      super();
+
+      const handleIntersection = (entries, observer) => {
+        if (!entries[0].isIntersecting) return;
+        observer.unobserve(this);
+
+        fetch(this.dataset.url)
+          .then(response => response.text())
+          .then(text => {
+            const html = document.createElement('div');
+            html.innerHTML = text;
+            const recommendations = html.querySelector('product-recommendations');
+            if (recommendations && recommendations.innerHTML.trim().length) {
+              this.innerHTML = recommendations.innerHTML;
+            }
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      }
+
+      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
+    }
+  }
+
+  customElements.define('product-recommendations', ProductRecommendations);
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "t:sections.main-product.name",
+    "settings": [
+		{
+			"type": "checkbox",
+			"id": "show_share_buttons",
+			"default": true,
+			"label": "t:sections.main-product.settings.show_share_buttons.label"
+		}
+	]
+  }
+{% endschema %}

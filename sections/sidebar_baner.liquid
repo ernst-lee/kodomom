@@ -1,0 +1,43 @@
+{%- assign is_home = canonical_url | replace: shop.url , "" -%}
+
+{%- if is_home == routes.root_url -%}
+<section>
+    <div class="marb10">
+      <a href="
+        {%- if section.settings.left_banner_url != blank -%}
+          {{ section.settings.left_banner_url }}
+        {%- else -%}
+          #
+        {%- endif -%}
+      ">
+        <img src="
+            {%- if section.settings.left_banner != blank -%}
+              {{ section.settings.left_banner | img_url: '800x800' }}
+            {%- else -%}
+              {{ 'f82d14c889a5eb294d027f80555a867f.jpg' | asset_url }}
+            {%- endif -%}
+          " 
+          alt=""
+        >
+        </a>
+    </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.sidebar_baner.name",
+    "settings": [
+		    {
+          "type": "image_picker",
+          "id": "left_banner",
+          "label": "t:sections.main_left.settings.banner.label"
+        },
+		    {
+          "type": "url",
+          "id": "left_banner_url",
+          "label": "t:sections.main_left.settings.banner_url.label"
+        }
+	]
+  }
+{% endschema %}

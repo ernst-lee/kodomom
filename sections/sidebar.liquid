@@ -1,0 +1,99 @@
+<section>
+    <h1>
+        <i class="fa fa-paw dolce-pointcolor" aria-hidden="true"></i>
+        {{ 'sections.main_left.category_title' | t }}
+    </h1>
+    <div class="area">
+        <ul id="appsItemCategoryTag">
+            {%- for link in section.settings.home_category.links -%}
+            <li class="appsItemCategoryTag_child">
+              <a href="{{ link.url }}" class="mainHeaderNavColor">{{ link.title | escape }}</a>
+              
+              {%- if link.links != blank -%}
+                <ul class="appsItemCategoryTag_lowerchild">
+                  {%- for childlink in link.links -%}
+                  <li>
+                    <a href="{{ childlink.url }}" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">
+                      {{ childlink.title | escape }}
+                    </a>
+                  </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+
+            </li>
+            {%- endfor -%}
+            
+        </ul>
+    </div>
+</section>
+
+{%-if section.blocks != blank -%}
+<section>
+    <h1>
+        <i class="fa fa-paw dolce-pointcolor" aria-hidden="true"></i>
+        {{ 'sections.main_left.information_title' | t }}
+    </h1>
+    <div class=" area">
+
+        <ul>
+
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'column' -%}
+                <li class="{{ block.settings.information_class }}">
+                  <span class="webicon-pd font_reset">
+                    <a href="{{ block.settings.information_url }}">
+                      {{ block.settings.information_name }}
+                    </a>
+                  </span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+
+            <li>
+              {% render 'propaganda' %}
+            </li>
+
+        </ul>
+
+    </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.main_left.name",
+    "settings": [
+		    {
+          "type": "link_list",
+          "id": "home_category",
+          "default": "main-menu",
+          "label": "t:sections.main_left.settings.home_category.label"
+        }
+	],
+    "blocks": [
+		{
+        "type": "column",
+        "name": "t:sections.index_home.settings.column.label",
+        "settings": [
+          {
+            "type": "text",
+            "id": "information_name",
+            "label": "t:sections.index_home.settings.information_name.label"
+          },
+		      {
+            "type": "url",
+            "id": "information_url",
+            "label": "t:sections.index_home.settings.information_url.label"
+          },
+ 		      {
+          "type": "text",
+          "id": "information_class",
+          "default": "webicon-about",
+          "label": "t:sections.index_home.settings.information_class.label"
+          }
+        ]
+    }
+	  ]
+  }
+{% endschema %}
